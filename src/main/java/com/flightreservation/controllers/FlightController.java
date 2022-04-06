@@ -1,6 +1,6 @@
 package com.flightreservation.controllers;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,12 +19,14 @@ public class FlightController {
 	private FlightRepository flightRepository;
 
 	@RequestMapping("findFlights")
-	public String findFlights(@RequestParam("from") String from,@RequestParam("to") String to, @RequestParam("departureDate") @DateTimeFormat(pattern = "MM-dd-yyyy") Date departureDate,ModelMap modelMap) {
-		
-	 List<Flight>flight=flightRepository.findFlights(from,to,departureDate);
-	 modelMap.addAttribute("flights",flights);
+	public String findFlights(@RequestParam("from") String from, @RequestParam("to") String to,
+			@RequestParam("departureDate") @DateTimeFormat(pattern = "MM-dd-yyyy") Date departureDate,
+			ModelMap modelMap) {
+
+		List<Flight> flights = flightRepository.findFlights(from, to, departureDate);
+		modelMap.addAttribute("flights", flights);
 		return "displayFlights";
-		
+
 	}
-	
+
 }
